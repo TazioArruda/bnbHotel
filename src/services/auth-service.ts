@@ -20,7 +20,7 @@ export class AuthService {
        }
         //<------------------------ COMPARAR TOKEN -------------------> 
        const passwordValid = await bcrypt.compare(params.password, guest.password as string)
-       if (passwordValid){
+       if (!passwordValid){
         throw new Error ("e-mail/password invalid!")
        }
 
