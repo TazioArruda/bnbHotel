@@ -12,19 +12,28 @@ export class AuthService {
     constructor(private guestRepository: GuestRepository){}
     
     async login(params: InputLoginDTO): Promise<OutputLoginDTO>{
-       // 1. Buscar o usuário pelo e-mail no bando de dados 
-       // 2. Comparar a senha que o usuário enviou com a senha do banco de dados 
-       // 3. gerar tokem
-
+      
+      // <-------------------------- BUSCAR USUARIO POR EMAIL -------------------> 
        const guest = await this.guestRepository.getByEmail(params.email)
        if(!guest){
          throw new Error("e-mail/password invalid")
        }
-
+        //<------------------------ COMPARAR TOKEN -------------------> 
        const passwordValid = await bcrypt.compare(params.password, guest.password as string)
        if (passwordValid){
         throw new Error ("e-mail/password invalid!")
        }
-    }
+
+       // < ---------------------------------- GERAR TOKEM --------------------------->
+
+       const token = jwt.sign(
+        {id: guest.id, name: guest.name},
+        process.env.SECRET_KEY as string,
+        {expiresIn:"5min"}
+      )
+
+      return {token}
+
+    }  
 
 }
