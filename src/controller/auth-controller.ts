@@ -3,6 +3,7 @@ import * as yup from "yup"
 import { GuestService } from "../services/guest-service";
 import { GuestRepository } from "../repositories/guest-repository";
 import { AuthService } from "../services/auth-service";
+import { CodeStatus } from "../utilis/status";
 
 const repository = new GuestRepository()
 const service = new AuthService(repository)
@@ -20,11 +21,11 @@ export async function loginController(req:Request, res: Response) {
 
         await bodyValidator.validate(body)
         const result = await service.login(body);
-        return res.status(200).json(result)
+        return res.status(CodeStatus.OK).json(result)
         
     } catch (err) {
 
-        return res.status(400).json({ message: err.message})
+        return res.status(CodeStatus.BAD_REQUEST).json({ message: err.message})
         
     }
     

@@ -12,4 +12,10 @@ export class GuestRepository{
         const guest = await GuestModel.create(params)
         return guest
     }
+
+
+    async findById(id: string ){
+        const guest = await GuestModel.findById(id)
+        return guest
+    }
 }

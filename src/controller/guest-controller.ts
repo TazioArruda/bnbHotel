@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as yup from "yup"
 import { GuestRepository } from "../repositories/guest-repository";
 import { GuestService } from "../services/guest-service";
+import { CodeStatus } from "../utilis/status";
 
 const repository = new GuestRepository()
 const service = new GuestService(repository)
@@ -23,15 +24,15 @@ const service = new GuestService(repository)
         
         await bodyValidator.validate(body)
         const result = await service.create(body)
-        return res.status(201).json(result)
+        return res.status(CodeStatus.CREATED).json(result)
         
     } catch (err: any) {
 
         if (err.message === "registered user"){
-            return res.status(409).json({message: err.message})
+            return res.status(CodeStatus.CONFLICT).json({message: err.message})
         }
 
-        return res.status(400).json({message: err.message})
+        return res.status(CodeStatus.BAD_REQUEST).json({message: err.message})
         
     }
 
