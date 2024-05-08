@@ -11,6 +11,6 @@ const RomSchema = new mongoose.Schema({
     status: { type: String, required: true },
 
 
-})
+},{timestamps:true})
 
 export const RomModel = mongoose.model("Rom", RomSchema)

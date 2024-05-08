@@ -6,6 +6,7 @@ export class Database {
         mongoose.connection.on("open", () =>{
             console.log("Database is runing")
         })
+        
        await mongoose.connect(process.env.DATABASE_URL as string)
     }
 }
