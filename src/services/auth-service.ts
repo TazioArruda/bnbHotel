@@ -16,6 +16,7 @@ export class AuthService {
       // <-------------------------- BUSCAR USUARIO POR EMAIL -------------------> 
        const guest = await this.guestRepository.getByEmail(params.email)
        if(!guest){
+        
          throw new Error("e-mail/password invalid")
        }
         //<------------------------ COMPARAR TOKEN -------------------> 
@@ -25,6 +26,7 @@ export class AuthService {
        }
 
        // < ---------------------------------- GERAR TOKEM --------------------------->
+       
        const token = jwt.sign(
         {id: guest.id},
         process.env.SECRET_KEY as string,

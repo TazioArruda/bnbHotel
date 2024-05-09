@@ -1,22 +1,21 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { AdminModel } from "../entities/admin";
 import { InputAdminDTO, OutputAdminDTO } from "../dto/admin-dto";
 import { AdminRepository } from "../repositories/admin-repository";
 
 
 export class AdminAuthService {
-    static login(body: any) {
-        throw new Error('Method not implemented.');
-    }
 
     constructor(private adminRepository: AdminRepository){}
 
     async login(params: InputAdminDTO): Promise<OutputAdminDTO> {
         // Busca o administrador por e-mail
+        
         const admin = await this.adminRepository.getByEmail(params.email);
+        console.log(admin)
         if (!admin) {
+            
             throw new Error("E-mail/password invalid");
         }
 

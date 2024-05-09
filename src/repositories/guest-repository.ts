@@ -3,7 +3,6 @@ import { GuestModel } from "../entities/guest";
 
 export class GuestRepository{
     async getByEmail(email: string){
-        console.log(email)
         const guest = await GuestModel.findOne({ email })
         return guest
     }
