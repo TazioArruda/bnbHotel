@@ -25,15 +25,14 @@ export class AuthService {
        }
 
        // < ---------------------------------- GERAR TOKEM --------------------------->
-
        const token = jwt.sign(
-        {id: guest.id, name: guest.name},
+        {id: guest.id},
         process.env.SECRET_KEY as string,
-        {expiresIn:"5min"}
+        {expiresIn:"25min"}
       )
 
-      return {token}
+     return {token}
 
-    }  
+  }  
 
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as yup from "yup"
-import { GuestService } from "../services/guest-service";
+
 import { GuestRepository } from "../repositories/guest-repository";
 import { AuthService } from "../services/auth-service";
 import { CodeStatus } from "../utilis/status";
