@@ -17,7 +17,7 @@ Sprint inicial
          - Como diferenciar um token de hóspede de um token de gerente? 🤔
  [x] 3. Login de Gerente - POST /admin/auth
          - Cadastrar um gerente no banco de dados
-            ( cadastrei porém não estou conseguindo acessar no vs code)
+            
          - Vale a pena ter dois middleware diferentes pra algo tão parecido???
 
 

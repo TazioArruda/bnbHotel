@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const RomSchema = new mongoose.Schema({
 
-    id: { type: String, required: true },
     number: { type: Number, default:0, required: true },
     type: { type: String, required: true },
     guest_capacity: { type: Number, required: true },

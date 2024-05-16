@@ -8,11 +8,8 @@ export class RoomService{
 
     constructor(private roomRepository: RoomRepository){}
 
-    async create(params: InputRoomDTO): Promise<OutputRoomDTO>{
-        // Verificação se o usúario é um administrador 
-        if(!user.isAdmin){
-            throw new Error("Unauthorized: Only administrators can create rooms.")
-        }
+    async create(params: InputRoomDTO){
+       
         //Criação de um objeto quarto com status inicial "Disponivel"
 
         const newRoom = {
