@@ -10,7 +10,7 @@ const service = new RoomService(repository)
 export async function roomController(req:Request, res:Response) {
 
     try {
-        const {body} = req 
+        const {body, file} = req 
         const bodyValidator = yup.object({
             number: yup.number().required().min(0),
             type: yup.string().required(),
@@ -18,9 +18,11 @@ export async function roomController(req:Request, res:Response) {
             daily_rate: yup.number().required().min(0),
             photo: yup.string().required(), 
         })
-
-        await bodyValidator.validate(body)
-        const result = await service.create(body)
+        console.log("body: ", body)
+        console.log("file: ", file)
+        const data = {...body, photo: file?.filename}
+        await bodyValidator.validate(data)
+        const result = await service.create(data)
         return res.status(CodeStatus.CREATED).json(result)
 
     } catch (err) {
