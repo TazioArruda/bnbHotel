@@ -7,4 +7,16 @@ export class RoomRepository{
        const room = await RomModel.create(params)
        return room
     }
+
+    async getById(id: string){
+        return RomModel.findById(id);
+      }
+    
+      async updateById(id: string, status: string){
+        return RomModel.findByIdAndUpdate({id, status})
+      }
+
+   // async pushBooking(...booking){
+   //     await RomModel.find
+   // }
 }

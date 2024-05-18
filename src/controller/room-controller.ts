@@ -18,8 +18,6 @@ export async function roomController(req:Request, res:Response) {
             daily_rate: yup.number().required().min(0),
             photo: yup.string().required(), 
         })
-        console.log("body: ", body)
-        console.log("file: ", file)
         const data = {...body, photo: file?.filename}
         await bodyValidator.validate(data)
         const result = await service.create(data)
@@ -35,3 +33,33 @@ export async function roomController(req:Request, res:Response) {
     }
 
 }
+
+export async function updateStatus(req: Request, res: Response){
+    try {
+      // Extrair o corpo da requisição
+      const {params, body } = req;
+      const bodyValidator = yup.object({
+            status: yup.string().required()
+      })
+
+      const paramsValidator = yup.object({
+            id: yup.string().required()
+      })
+
+        await bodyValidator.validate(body)
+        await paramsValidator.validate(params)
+        const result = await service.update(params.id, body)
+        return res.status(CodeStatus.CREATED).json(result)
+
+    } catch (err) {
+      // Tratar erros de validação ou outros erros
+      if (err.message === "registered status"){
+        return res.status(CodeStatus.CONFLICT).json({message: err.message})
+    }
+
+    return res.status(CodeStatus.BAD_REQUEST).json({message: err.message})
+    
+}
+  }
+
+

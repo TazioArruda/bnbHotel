@@ -7,8 +7,8 @@ Sprint inicial
  [x] Configurações de Banco de Dados
  [x] Criação de um servidor básico no Express
  [x] Criação do middleware de validação
- [-] Criar entidades (interfaces)
- [-] Criar models
+ [X] Criar entidades (interfaces)
+ [X] Criar models
  [x] 1. Cadastro do Hóspede - POST /guests
          - Criptografar a senha (Provider de criptografia)
  [x] 2. Login do Hóspede - POST /guests/auth
@@ -19,13 +19,6 @@ Sprint inicial
          - Cadastrar um gerente no banco de dados
             
          - Vale a pena ter dois middleware diferentes pra algo tão parecido???
-
-
-2. Citar o que faltou para completar itens iniciados
-    . Entidades - só fiz as que estava trabalhando, por exemplor GUESTS, ADMIN!
-
-3. Entender os itens que não foram iniciados
- Estou com problemas no retorno do tokem do ADMIN - faltou conhecimento técnico
 
 Sprint 02 (De 10 a 16/05)
 Sprint intermediária 01

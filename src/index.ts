@@ -9,6 +9,7 @@ const port = process.env.PORT
 const server = express()
 
 server.use(express.json())
+server.use(express.static("uploads/"))
 server.use(routes)
 
 
