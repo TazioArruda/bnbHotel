@@ -1,5 +1,3 @@
-
 export interface UpdateStatusDTO {
-    status: 'disponível' | 'ocupado' | 'manutenção';
-  }
-
+  status: "disponível" | "ocupado" | "manutenção";
+}

@@ -22,6 +22,16 @@ Sprint inicial
 
 Sprint 02 (De 10 a 16/05)
 Sprint intermediária 01
+[X] Alterar Status Quarto (Check in, checkout e manutenção) (ROTA PRIVADA - ADMIN)
+
+        1. Rota para alterar o status do quarto entre: "disponível", "ocupado", "em manutenção"
+
+        2. Não permitir o envio se o usuário que está executando a ação não for um administrador
+        finalizei dia 19/05 - enfretei varias dificuldades mais aprendi com os erros rsrsrs 
+        
+[] Listar Todos os Quartos disponíveis
+        (estou trabaçhando nesse)
+        Deve listar os quartos com status "disponível"
 
  [ ] Features Básicas
 Sprint 03 (De 17 a 23/05)
