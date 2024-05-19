@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const RomSchema = new mongoose.Schema(
+const RoomSchema = new mongoose.Schema(
   {
     number: { type: Number, default: 0, required: true },
     type: { type: String, required: true },
@@ -12,4 +12,4 @@ const RomSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const RomModel = mongoose.model("Rom", RomSchema);
+export const RoomModel = mongoose.model("Rom", RoomSchema);

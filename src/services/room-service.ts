@@ -29,4 +29,12 @@ export class RoomService {
 
     return room;
   }
+  // Encontrar os disponiveis
+
+  async listAvailableRooms() {
+    //console.log("Calling listAvailableRooms function...");
+    const availableRooms = await this.roomRepository.findAllAvailable();
+    //console.log("Available Rooms:", availableRooms);
+    return availableRooms;
+  }
 }

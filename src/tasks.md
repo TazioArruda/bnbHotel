@@ -28,9 +28,9 @@ Sprint intermediária 01
 
         2. Não permitir o envio se o usuário que está executando a ação não for um administrador
         finalizei dia 19/05 - enfretei varias dificuldades mais aprendi com os erros rsrsrs 
-        
-[] Listar Todos os Quartos disponíveis
-        (estou trabaçhando nesse)
+
+[x] Listar Todos os Quartos disponíveis
+        (estou trabaçhando nesse) - trabalho concluido
         Deve listar os quartos com status "disponível"
 
  [ ] Features Básicas

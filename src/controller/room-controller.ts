@@ -30,6 +30,16 @@ export async function roomController(req: Request, res: Response) {
   }
 }
 
+export async function getAvailableRooms(req: Request, res: Response) {
+    try {
+      const availableRooms = await service.listAvailableRooms();
+      res.status(CodeStatus.OK).json(availableRooms);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+
 export async function updateStatus(req: Request, res: Response) {
   try {
     // Extrair o corpo da requisição
@@ -58,3 +68,5 @@ export async function updateStatus(req: Request, res: Response) {
     return res.status(CodeStatus.BAD_REQUEST).json({ message: err.message });
   }
 }
+
+
