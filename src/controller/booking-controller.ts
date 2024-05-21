@@ -22,8 +22,8 @@ export async function bookingController(req: Request, res: Response) {
       checkin_date: yup.date().required(), 
       checkout_date: yup.date().required(), 
       guests: yup.number().required().positive().integer(), 
-      id_room: yup.number().required(), 
-      id_guest: yup.number().required(), 
+      id_room: yup.string().required(), 
+      id_guest: yup.string().required(), 
       status: yup.string().oneOf(['confirmada', 'pendente']).default('confirmada') // status da reserva
     });
 

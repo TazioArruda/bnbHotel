@@ -3,7 +3,7 @@ export interface BookingInputDTO {
   checkout_date: Date;
   guests: number;
   id_room: string;
-  id_guest: number;
+  id_guest: string;
   status: string;
 }
 
@@ -11,7 +11,7 @@ export interface BookingOutputDTO {
   checkin_date: Date;
   checkout_date: Date;
   guests: number;
-  id_room: number;
-  id_guest: number;
+  id_room: string;
+  id_guest: string;
   status: string;
 }
