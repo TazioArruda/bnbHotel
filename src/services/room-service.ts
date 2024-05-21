@@ -21,7 +21,6 @@ export class RoomService {
       throw new Error("Invalid status.");
     }
     // Encontrar o quarto pelo ID
-    console.log(`service ${id}`);
     const room = await this.roomRepository.updateById(id, updateStatus);
     if (!room) {
       throw new Error("Room not found.");

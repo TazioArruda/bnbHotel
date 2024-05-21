@@ -1,19 +1,17 @@
-import 'dotenv/config'
-import express from "express"
+import "dotenv/config";
+import express from "express";
 
-import { Database } from './database/connection'
-import { routes } from './routes'
-Database.initialize()
+import { Database } from "./database/connection";
+import { routes } from "./routes";
+Database.initialize();
 
-const port = process.env.PORT
-const server = express()
+const port = process.env.PORT;
+const server = express();
 
-server.use(express.json())
-server.use(express.static("uploads/"))
-server.use(routes)
+server.use(express.json());
+server.use(express.static("uploads/"));
+server.use(routes);
 
-
-
-server.listen(port, () =>{
-    console.log(" server " + port)
-})
+server.listen(port, () => {
+  console.log(" server " + port);
+});
