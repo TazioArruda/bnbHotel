@@ -2,6 +2,7 @@ import { BookingInputDTO, BookingOutputDTO } from "../dto/booking-dto";
 import { BookingRepository } from "../repositories/booking-repository";
 import { RoomRepository } from "../repositories/room-repository";
 
+
 export class BookingService {
   constructor(
     private bookingRepository: BookingRepository,
@@ -38,5 +39,30 @@ export class BookingService {
     });
 
     return booking;
+
+    
   }
+
+  async cancelBooking(bookingId: string, guestId: string){
+    // Buscar a reserva pelo ID
+    const booking = await this.bookingRepository.getById(bookingId);
+
+    // Verificar se a reserva existe
+    if (!booking) {
+      throw new Error("Booking not found.");
+    }
+    // Verificar se o hóspede que está tentando cancelar é o proprietário da reserva
+    if(booking.id_guest !== guestId){
+      throw new Error("You can only cancel your own bookings.");
+    }
+
+    // Verificar se o status da reserva é "em andamento"
+    if (booking.status === "em andamento") {
+      throw new Error("Cannot cancel booking in progress.");
+    }
+
+    // Cancelar a reserva
+    await this.bookingRepository.delete(bookingId);
+  }
+
 }

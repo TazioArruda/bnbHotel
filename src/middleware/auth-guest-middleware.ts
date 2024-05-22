@@ -19,9 +19,10 @@ export function authenticateGuest(req: Request, res: Response, next: NextFunctio
   }
 
   try {
-    // Verificar o token
-    jwt.verify(token, process.env.SECRET_KEY as string);
-    // Se o token for válido, chamar next()
+    // Verificar e decodificar o token
+    const decoded = jwt.verify(token, process.env.SECRET_KEY as string) as { id: string };
+    // Armazena o ID do hóspede no objeto req
+    req.user = { id: decoded.id} ; // Certifique-se de que a interface Request seja estendida para incluir 'user'
     return next();
   } catch (err) {
     // Se o token não for válido, retornar erro 401

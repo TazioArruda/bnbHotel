@@ -20,6 +20,14 @@ export class BookingRepository {
       ],
     }).exec();
   }
+
+  async delete(id: string){
+    await BookingModel.findByIdAndDelete(id);
+  }
+  async getById(id: string): Promise<any> {
+    return BookingModel.findById(id);
+  }
+
 }
 
 

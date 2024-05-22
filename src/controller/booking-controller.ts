@@ -18,6 +18,7 @@ export async function bookingController(req: Request, res: Response) {
   try {
     
     const { body } = req;
+    
     const bodyValidator = yup.object({
       checkin_date: yup.date().required(), 
       checkout_date: yup.date().required(), 
