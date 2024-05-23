@@ -1,7 +1,7 @@
 import {Router} from "express";
-import { bookingController } from "../controller/booking-controller";
+import { bookingController, cancelBookingController } from "../controller/booking-controller";
 import { authenticateGuest } from "../middleware/auth-guest-middleware";
-import { cancelBookingController } from "../controller/cancel-booking-controller";
+
 
 
 

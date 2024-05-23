@@ -9,33 +9,46 @@ export class BookingService {
     private roomRepository: RoomRepository
   ) {}
 
-  async create(params: BookingInputDTO){
+  async create(data: BookingInputDTO, guestId: string){
+
+    const { id_room, guests, checkin_date, checkout_date, id_guest } = data;
+
     // Verificar se o quarto existe
-    const room = await this.roomRepository.getById(params.id_room);
+    const room = await this.roomRepository.getById(id_room);
     if (!room) {
       throw new Error("Room not found.");
     }
+        console.log("id Logado", guestId)
+        console.log("id data", id_guest)
+    // Verificar se o hóspede que está tentando cadastar é o proprietário da reserva
+    if(guestId !== id_guest){
+      throw new Error("you are registering a reservation with a user that is not yours.");
+    }
 
     // Verificar se a quantidade de hóspedes não excede a capacidade do quarto
-    if (params.guests > room.guest_capacity) {
+    if (guests > room.guest_capacity) {
       throw new Error("Number of guests exceeds room capacity.");
     }
 
     // Verificar se já não existe uma reserva no intervalo solicitado
     const overlappingBookings =
       await this.bookingRepository.findOverlappingBookings(
-        params.id_room,
-        params.checkin_date,
-        params.checkout_date
+        id_room,
+        checkin_date,
+        checkout_date
       );
     if (overlappingBookings.length > 0) {
       throw new Error("Room is not available in the selected date range.");
     }
 
-    // Criar a reserva com status "confirmada"
+    // Criar a reserva com status "confirmada" e o ID do hóspede autenticado
     const booking = await this.bookingRepository.create({
-      ...params,
-      status: "confirmada",
+      checkin_date,
+      checkout_date,
+      guests,
+      id_room,
+      id_guest: guestId,
+      status: "confirmada"
     });
 
     return booking;

@@ -1,7 +1,14 @@
 import { BookingModel } from "../entities/booking";
 
 export class BookingRepository {
-  async create(params: { status: string }) {
+  async create(params: {
+    checkin_date: Date;
+    checkout_date: Date;
+    guests: number;
+    id_room: string;
+    id_guest: string;
+    status: string;
+  }) {
     const booking = await BookingModel.create(params);
     return booking;
   }
@@ -24,7 +31,7 @@ export class BookingRepository {
   async delete(id: string){
     await BookingModel.findByIdAndDelete(id);
   }
-  async getById(id: string): Promise<any> {
+  async getById(id: string){
     return BookingModel.findById(id);
   }
 

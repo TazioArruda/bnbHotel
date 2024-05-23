@@ -15,7 +15,7 @@ export function authenticateGuest(req: Request, res: Response, next: NextFunctio
 
   if (!token) {
     // Se o token não estiver presente, retornar erro 401
-    return res.status(CodeStatus.UNAUTHORIZED).json({ message: 'Unauthorized' });
+    return res.status(CodeStatus.UNAUTHORIZED).json({ message: 'no Token' });
   }
 
   try {
@@ -26,6 +26,6 @@ export function authenticateGuest(req: Request, res: Response, next: NextFunctio
     return next();
   } catch (err) {
     // Se o token não for válido, retornar erro 401
-    return res.status(CodeStatus.UNAUTHORIZED).json({ message: 'Unauthorized' });
+    return res.status(CodeStatus.UNAUTHORIZED).json({ message: 'Token expired ' });
   }
 }
