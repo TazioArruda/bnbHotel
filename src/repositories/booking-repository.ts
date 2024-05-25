@@ -35,6 +35,10 @@ export class BookingRepository {
     return BookingModel.findById(id);
   }
 
+  async getAllBookingsForGuest(guestId: string) {
+    return BookingModel.find({ id_guest: guestId }).exec();
+  }
+
 }
 
 

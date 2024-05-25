@@ -13,16 +13,12 @@ const roomRepository = new RoomRepository(); // Repositório de quartos
 const bookingRepository = new BookingRepository(); // Repositório de reservas
 const bookingService = new BookingService(bookingRepository, roomRepository);
 
-// Função controladora para criar uma reserva
+// ------------------- Função controladora para criar uma reserva ---------------------------------------
 export async function bookingController(req: Request, res: Response) {
   try {
     
     const { body } = req;
-    console.log(body)
-    
     const guestId = req.user?.id;
-    console.log(guestId)
-    console.log(body.id_guest)
 
     if (!guestId) {
       return res.status(CodeStatus.UNAUTHORIZED).json({ message: 'Unauthorized' });
@@ -55,7 +51,7 @@ export async function bookingController(req: Request, res: Response) {
   }
 }
 
-  // Função controladora para cancelar uma reserva
+  // -----------------------Função controladora para cancelar uma reserva -----------------------------------------
 export async function cancelBookingController(req: Request, res: Response) {
   try {
     const { id } = req.params;
@@ -69,6 +65,24 @@ export async function cancelBookingController(req: Request, res: Response) {
 
     return res.sendStatus(CodeStatus.OK);
   } catch (err) {
+    return res.status(CodeStatus.BAD_REQUEST).json({ message: err.message });
+  }
+}
+
+// --------------------------Função Controladora para Listas todas as reservas----------------------------------- 
+
+export async function listBookingsForGuestController(req: Request, res: Response) {
+  try {
+    const guestId = req.user?.id;
+
+    if (!guestId) {
+      return res.status(CodeStatus.UNAUTHORIZED).json({ message: 'Unauthorized' });
+    }
+
+    const bookings = await bookingService.getAllBookingsForGuest(guestId);
+    return res.status(CodeStatus.OK).json(bookings);
+
+  } catch (err: any) {
     return res.status(CodeStatus.BAD_REQUEST).json({ message: err.message });
   }
 }

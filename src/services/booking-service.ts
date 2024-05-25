@@ -2,7 +2,7 @@ import { BookingInputDTO, BookingOutputDTO } from "../dto/booking-dto";
 import { BookingRepository } from "../repositories/booking-repository";
 import { RoomRepository } from "../repositories/room-repository";
 
-
+//----------------------METODO DE CRIAÇÃO DE RESERVA ----------------------------------------
 export class BookingService {
   constructor(
     private bookingRepository: BookingRepository,
@@ -18,8 +18,7 @@ export class BookingService {
     if (!room) {
       throw new Error("Room not found.");
     }
-        console.log("id Logado", guestId)
-        console.log("id data", id_guest)
+        
     // Verificar se o hóspede que está tentando cadastar é o proprietário da reserva
     if(guestId !== id_guest){
       throw new Error("you are registering a reservation with a user that is not yours.");
@@ -40,6 +39,11 @@ export class BookingService {
     if (overlappingBookings.length > 0) {
       throw new Error("Room is not available in the selected date range.");
     }
+    // Verificando se o status é diferente de disponivel
+    if(room.status !== "disponivel"){
+
+      throw new Error("Room is not available")
+    }
 
     // Criar a reserva com status "confirmada" e o ID do hóspede autenticado
     const booking = await this.bookingRepository.create({
@@ -55,6 +59,8 @@ export class BookingService {
 
     
   }
+
+    // ------------------METODO DE CANCELAR RESERVA ----------------------------------
 
   async cancelBooking(bookingId: string, guestId: string){
     // Buscar a reserva pelo ID
@@ -78,4 +84,11 @@ export class BookingService {
     await this.bookingRepository.delete(bookingId);
   }
 
+
+  //---------------- METODO DE BUSCAR RESERVAS FEITAS PELO HOSPEDE LOGADO --------------------------
+  async getAllBookingsForGuest(guestId: string) {
+    return this.bookingRepository.getAllBookingsForGuest(guestId);
+  }
+
 }
+

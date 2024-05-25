@@ -22,7 +22,7 @@ export class RoomRepository {
   }
 
   async findAllAvailable() {
-   return RoomModel.find({ status: "disponível" }).exec();
+   return RoomModel.find({ status: "disponivel" }).exec();
  }
 
   // async pushBooking(...booking){

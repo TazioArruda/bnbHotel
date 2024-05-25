@@ -10,14 +10,14 @@ export class RoomService {
     //Criação de um objeto quarto com status inicial "Disponivel"
     const newRoom = {
       ...params,
-      status: "disponível",
+      status: "disponivel",
     };
     const createdRoom = await this.roomRepository.create(newRoom);
     return createdRoom;
   }
   async update(id: string, updateStatus: string) {
     // Validar o novo status
-    if (!["disponível", "ocupado", "manutenção"].includes(updateStatus)) {
+    if (!["disponivel", "ocupado", "manutencao"].includes(updateStatus)) {
       throw new Error("Invalid status.");
     }
     // Encontrar o quarto pelo ID
