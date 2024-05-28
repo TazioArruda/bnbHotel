@@ -90,5 +90,12 @@ export class BookingService {
     return this.bookingRepository.getAllBookingsForGuest(guestId);
   }
 
+  //---------------- METODO  DE LISTAR TODOS OS QUARTOS DISPONÍVEIS POR DATA -----------------------
+  async getAvailableRoomsByDate(startDate: Date, endDate: Date) {
+    const ids = await this.bookingRepository.getReserve(startDate, endDate);
+    return this.roomRepository.getAvailableRoomsByDate(ids);
+    
+    
+  }
 }
 

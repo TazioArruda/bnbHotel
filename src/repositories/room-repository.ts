@@ -1,4 +1,5 @@
 import { InputRoomDTO, OutputRoomDTO } from "../dto/room-dto";
+import { BookingModel } from "../entities/booking";
 import { RoomModel } from "../entities/room";
 
 
@@ -25,7 +26,15 @@ export class RoomRepository {
    return RoomModel.find({ status: "disponivel" }).exec();
  }
 
-  // async pushBooking(...booking){
-  //     await RomModel.find
-  // }
+ // ------------------crianção do metodo, para Listar Todos os Quartos disponíveis por data ---------------------------
+
+ async getAvailableRoomsByDate(reservedRoomIds:string[]) {
+
+  // Encontrar quartos disponíveis que não estejam nos IDs reservados
+  return RoomModel.find({
+    status: "disponivel",
+    id: { $nin: reservedRoomIds }
+  }).exec();
 }
+}
+

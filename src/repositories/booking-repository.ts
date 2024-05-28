@@ -39,6 +39,20 @@ export class BookingRepository {
     return BookingModel.find({ id_guest: guestId }).exec();
   }
 
+  async getReserve (startDate: Date, endDate: Date){
+    const reservedRoomIds = await BookingModel.find({
+      $or: [
+        { checkin_date: { $lt: endDate, $gte: startDate } },
+        { checkout_date: { $gt: startDate, $lte: endDate } },
+        { checkin_date: { $lte: startDate }, checkout_date: { $gte: endDate } }
+      ],
+      status: { $in: ["confirmada", "em andamento"] }
+    }).distinct("id_room");
+    
+    return reservedRoomIds
+  }
+
 }
+
 
 

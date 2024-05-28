@@ -86,3 +86,23 @@ export async function listBookingsForGuestController(req: Request, res: Response
     return res.status(CodeStatus.BAD_REQUEST).json({ message: err.message });
   }
 }
+
+// ------------------------Função controladora para listar quartos disponíveis por data -----------------------------
+export async function getAvailableRoomsController(req: Request, res: Response) {
+  try {
+    const {body} = req;
+    const bodyValidator = yup.object({
+      startDate: yup.date().required(),
+      endDate: yup.date().required()
+    });
+
+    await bodyValidator.validate(body);
+
+    const result = await bookingService.getAvailableRoomsByDate(body.startDate, body.endDate);
+    
+
+    return res.status(CodeStatus.OK).json(result);
+  } catch (err: any) {
+    return res.status(CodeStatus.BAD_REQUEST).json({ message: err.message });
+  }
+}
