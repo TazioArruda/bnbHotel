@@ -33,7 +33,7 @@ export class RoomRepository {
   // Encontrar quartos disponíveis que não estejam nos IDs reservados
   return RoomModel.find({
     status: "disponivel",
-    id: { $nin: reservedRoomIds }
+    _id: { $nin: reservedRoomIds }
   }).exec();
 }
 }

@@ -15,7 +15,7 @@ roomRoutes.post(
 );
 roomRoutes.put("/:id", authenticateAdmin, updateStatus);
 roomRoutes.get('/available', getAvailableRooms)
-roomRoutes.get("/availableRooms", getAvailableRoomsController);
+roomRoutes.post("/availableRooms", getAvailableRoomsController);
 
 
 export { roomRoutes };

@@ -92,13 +92,14 @@ export async function getAvailableRoomsController(req: Request, res: Response) {
   try {
     const {body} = req;
     const bodyValidator = yup.object({
-      startDate: yup.date().required(),
-      endDate: yup.date().required()
+      checkin_date: yup.date().required(),
+      checkout_date: yup.date().required()
     });
-
+    
     await bodyValidator.validate(body);
+   
 
-    const result = await bookingService.getAvailableRoomsByDate(body.startDate, body.endDate);
+    const result = await bookingService.getAvailableRoomsByDate(body.checkin_date, body.checkout_date);
     
 
     return res.status(CodeStatus.OK).json(result);

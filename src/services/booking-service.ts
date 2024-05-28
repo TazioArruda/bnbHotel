@@ -91,8 +91,9 @@ export class BookingService {
   }
 
   //---------------- METODO  DE LISTAR TODOS OS QUARTOS DISPONÍVEIS POR DATA -----------------------
-  async getAvailableRoomsByDate(startDate: Date, endDate: Date) {
-    const ids = await this.bookingRepository.getReserve(startDate, endDate);
+  async getAvailableRoomsByDate(checkin_date: Date, checkout_date: Date) {
+    const ids = await this.bookingRepository.getReserve(checkin_date, checkout_date);
+    console.log("ids reservado", ids)
     return this.roomRepository.getAvailableRoomsByDate(ids);
     
     
