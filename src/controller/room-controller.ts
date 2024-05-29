@@ -30,11 +30,15 @@ export async function roomController(req: Request, res: Response) {
   }
 }
 
+// Função controladora para obter quartos disponíveis
 export async function getAvailableRooms(req: Request, res: Response) {
     try {
+      // Chama o serviço para listar quartos disponíveis
       const availableRooms = await service.listAvailableRooms();
+      // Retorna a lista de quartos disponíveis com o status 200 (OK)
       res.status(CodeStatus.OK).json(availableRooms);
     } catch (error) {
+      // Em caso de erro, retorna uma resposta com status 500 (Internal Server Error)
       res.status(500).json({ message: error.message });
     }
   }
@@ -43,8 +47,6 @@ export async function getAvailableRooms(req: Request, res: Response) {
 export async function updateStatus(req: Request, res: Response) {
   try {
     // Extrair o corpo da requisição
-    console.log(req.params);
-    console.log(req.body);
     const { id } = req.params;
     const body = req.body;
     const bodyValidator = yup.object({
